@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pluto Networks - High-Performance Networking Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'pluto-dark': '#0F172A',
+                        'pluto-blue': '#2563EB',
+                        'pluto-purple': '#7C3AED',
+                        'pluto-light': '#F8FAFC',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 8s linear infinite',
+                    }
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Intersection Observer for scroll animations
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            fadeElements.forEach(el => observer.observe(el));
+
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
+    </script>
+</head>
+<body class="font-sans bg-pluto-light text-gray-800">
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50 transition-all duration-300" x-data="{ scrolled: false }"
+         @scroll.window="scrolled = (window.pageYOffset > 50)">
+        <div :class="{'py-2': scrolled, 'py-4': !scrolled}" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-pluto-dark">PLUTO<span class="gradient-text">NETWORKS</span></span>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#products" class="text-pluto-dark hover:text-pluto-blue font-medium transition-colors duration-300">Products</a>
+                    <a href="#solutions" class="text-pluto-dark hover:text-pluto-blue font-medium transition-colors duration-300">Solutions</a>
+                    <a href="#features" class="text-pluto-dark hover:text-pluto-blue font-medium transition-colors duration-300">Features</a>
+                    <a href="#resources" class="text-pluto-dark hover:text-pluto-blue font-medium transition-colors duration-300">Resources</a>
+                </div>
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <a href="#contact" class="bg-gradient-to-r from-pluto-blue to-pluto-purple text-white px-6 py-2 rounded-md font-medium hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl">Contact Sales</a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-pluto-dark focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white pb-4 px-4">
+            <div class="flex flex-col space-y-2">
+                <a href="#products" class="text-pluto-dark hover:text-pluto-blue px-3 py-2 rounded-md font-medium transition-colors duration-300">Products</a>
+                <a href="#solutions" class="text-pluto-dark hover:text-pluto-blue px-3 py-2 rounded-md font-medium transition-colors duration-300">Solutions</a>
+                <a href="#features" class="text-pluto-dark hover:text-pluto-blue px-3 py-2 rounded-md font-medium transition-colors duration-300">Features</a>
+                <a href="#resources" class="text-pluto-dark hover:text-pluto-blue px-3 py-2 rounded-md font-medium transition-colors duration-300">Resources</a>
+                <a href="#contact" class="bg-pluto-blue text-white px-3 py-2 rounded-md font-medium hover:bg-blue-700 transition-colors duration-300 text-center">Contact Sales</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-pluto-dark to-gray-900 text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 relative">
+            <!-- Animated background elements -->
+            <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20">
+                <div class="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-pluto-blue filter blur-3xl opacity-30"></div>
+                <div class="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-pluto-purple filter blur-3xl opacity-30"></div>
+                <div class="absolute top-1/3 right-1/3 w-32 h-32 rounded-full bg-white filter blur-2xl opacity-20"></div>
+            </div>
+            
+            <div class="relative z-10 md:flex items-center">
+                <div class="md:w-1/2 fade-in">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                        <span class="gradient-text">Powering</span> the Future of Intelligent Networking
+                    </h1>
+                    <p class="text-xl text-gray-300 mb-8">Scalable, Secure, and High-Performance Solutions for Modern Enterprises</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#solutions" class="bg-gradient-to-r from-pluto-blue to-pluto-purple hover:from-blue-600 hover:to-purple-600 text-white px-6 py-3 rounded-md font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center">
+                            Explore Solutions
+                        </a>
+                        <a href="#contact" class="border border-white hover:bg-white hover:text-pluto-dark text-white px-6 py-3 rounded-md font-medium transition-all duration-300 transform hover:-translate-y-1 text-center">
+                            Request Demo
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 mt-10 md:mt-0 fade-in" style="transition-delay: 0.2s">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" 
+                             alt="Network Infrastructure" 
+                             class="rounded-lg shadow-2xl floating transform transition-all duration-1000 hover:rotate-1 hover:scale-105">
+                        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-pluto-blue rounded-lg shadow-xl opacity-80 -z-10 floating" style="animation-delay: 0.3s"></div>
+                        <div class="absolute -top-6 -left-6 w-24 h-24 bg-pluto-purple rounded-lg shadow-xl opacity-80 -z-10 floating" style="animation-delay: 0.6s"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <section id="products" class="py-16 bg-cover bg-center bg-no-repeat relative" style="background-image: url('https://static.vecteezy.com/system/resources/thumbnails/019/892/358/small_2x/businessman-analyzing-company-growth-future-business-growth-arrow-graph-development-to-achieve-goals-business-outlook-financial-data-for-long-term-investment-photo.jpg');">
+  <!-- Dark overlay -->
+  <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+
+  <!-- Main content -->
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Heading -->
+    <div class="text-center mb-12 text-white">
+      <h2 class="text-4xl font-bold mb-4">Our Partners</h2>
+      <p class="text-lg">We collaborate with industry leaders to drive innovation and growth.</p>
+    </div>
+
+    <!-- Grid of partner cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      
+      <!-- Microsoft Card -->
+      <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
+        <div class="h-48 bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+          <img src="https://1000logos.net/wp-content/uploads/2021/04/Microsoft-logo.png" alt="Microsoft" class="h-16 object-contain" />
+        </div>
+        <div class="p-6 text-center">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Microsoft</h3>
+          <p class="text-gray-600">Leading the way in software, cloud computing, and AI.</p>
+        </div>
+      </div>
+
+      <!-- Google Card -->
+      <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 delay-100">
+        <div class="h-48 bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+          <img src="https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png" alt="Google" class="h-16 object-contain" />
+        </div>
+        <div class="p-6 text-center">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Google</h3>
+          <p class="text-gray-600">Innovating in search, advertising, and cloud technologies.</p>
+        </div>
+      </div>
+
+      <!-- Amazon Card -->
+      <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 delay-200">
+        <div class="h-48 bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+          <img src="https://1000logos.net/wp-content/uploads/2016/10/Amazon-Logo.png" alt="Amazon" class="h-16 object-contain" />
+        </div>
+        <div class="p-6 text-center">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Amazon</h3>
+          <p class="text-gray-600">Global leader in e-commerce and cloud services.</p>
+        </div>
+      </div>
+
+      <!-- IBM Card -->
+      <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 delay-300">
+        <div class="h-48 bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+          <img src="https://1000logos.net/wp-content/uploads/2017/03/IBM-logo.png" alt="IBM" class="h-16 object-contain" />
+        </div>
+        <div class="p-6 text-center">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">IBM</h3>
+          <p class="text-gray-600">Pioneering advancements in AI, cloud, and enterprise solutions.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-pluto-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Why Choose <span class="gradient-text">Pluto Networks</span>?</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Cutting-edge networking solutions designed for the demands of tomorrow's digital infrastructure</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-2 fade-in">
+                    <div class="text-pluto-blue mb-6">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                            <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M13 7H7v6h6V7z" />
+                                <path fill-rule="evenodd" d="M7 2a1 1 0 012 0v1h2V2a1 1 0 112 0v1h2a2 2 0 012 2v2h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v2a2 2 0 01-2 2h-2v1a1 1 0 11-2 0v-1H9v1a1 1 0 11-2 0v-1H5a2 2 0 01-2-2v-2H2a1 1 0 110-2h1V9H2a1 1 0 010-2h1V5a2 2 0 012-2h2V2zM5 5h10v10H5V5z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">High-Performance Networking</h3>
+                    <p class="text-gray-600">Ultra-low latency and high-throughput solutions for data-intensive applications with 99.999% uptime.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-2 fade-in" style="transition-delay: 0.1s">
+                    <div class="text-pluto-purple mb-6">
+                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center">
+                            <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">AI-Driven Automation</h3>
+                    <p class="text-gray-600">Self-healing networks with predictive analytics and machine learning for proactive issue resolution.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-2 fade-in" style="transition-delay: 0.2s">
+                    <div class="text-pluto-blue mb-6">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                            <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Enterprise-Grade Security</h3>
+                    <p class="text-gray-600">Zero-trust architecture with end-to-end encryption and real-time threat detection.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Our <span class="gradient-text">Product</span> Portfolio</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Comprehensive solutions for every networking challenge</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Product 1 -->
+                <div class="bg-pluto-light rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 fade-in">
+                    <div class="h-48 bg-gradient-to-r from-pluto-blue to-pluto-purple flex items-center justify-center">
+                        <svg class="h-20 w-20 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-semibold text-pluto-dark mb-3">Network Switch Pro</h3>
+                        <p class="text-gray-600">A robust, enterprise-level switch for seamless data flow across your organization's infrastructure.</p>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="bg-pluto-light rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 fade-in" style="transition-delay: 0.2s">
+                    <div class="h-48 bg-gradient-to-r from-pluto-blue to-pluto-purple flex items-center justify-center">
+                        <svg class="h-20 w-20 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2L2 7h3v8h4V7h4v8h4V7h3z" />
+                        </svg>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-semibold text-pluto-dark mb-3">Cloud Connectivity Hub</h3>
+                        <p class="text-gray-600">Secure cloud gateways to ensure reliable and scalable access to your digital infrastructure.</p>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="bg-pluto-light rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 fade-in" style="transition-delay: 0.3s">
+                    <div class="h-48 bg-gradient-to-r from-pluto-blue to-pluto-purple flex items-center justify-center">
+                        <svg class="h-20 w-20 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2L2 7h3v8h4V7h4v8h4V7h3z" />
+                        </svg>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-semibold text-pluto-dark mb-3">AI-Powered Network Monitoring</h3>
+                        <p class="text-gray-600">Leverage AI to optimize your network, predict failures, and enhance performance in real-time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-pluto-dark text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Get in Touch</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">Ready to take your network to the next level? Our team is here to help. Reach out to us for personalized support.</p>
+            </div>
+
+            <div class="flex justify-center">
+                <form action="#" method="POST" class="w-full max-w-lg bg-white p-8 rounded-lg shadow-xl">
+                    <div class="grid grid-cols-1 gap-6">
+                        <div>
+                            <label for="name" class="block text-gray-700 font-medium">Your Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-2 mt-2 border rounded-md focus:ring-pluto-blue focus:border-pluto-blue" placeholder="Enter your full name" required />
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-700 font-medium">Your Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-2 mt-2 border rounded-md focus:ring-pluto-blue focus:border-pluto-blue" placeholder="Enter your email address" required />
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-700 font-medium">Your Message</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 mt-2 border rounded-md focus:ring-pluto-blue focus:border-pluto-blue" placeholder="Tell us about your needs" required></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-6 text-center">
+                        <button type="submit" class="bg-pluto-blue text-white px-6 py-3 rounded-md font-medium hover:bg-blue-600 transition-colors duration-300 transform hover:-translate-y-1">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-pluto-dark text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2025 Pluto Networks. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
